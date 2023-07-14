@@ -3,8 +3,9 @@
 This project is a collection of my solutions for Leet Code problems. 
 Each solution can be found in a folder whose name matches the problem number on Leet 
 Code. For instance, Leet Code problem number 1 will have a folder named "1_two_sum"
-and a file within called '1_two_sum.py.' When necessary, a solution folder will also 
-contain an .md file that provides additional context to the solution.
+and a file within called 'two_sum.py.' If I find it necessary, a folder will also contain a readme file
+whose name is in line with the .py file. To continue with the example above, '1_two_sum' would
+contain a README file called 'two_sum_README.md.'
 
 <br/><br/>
 
