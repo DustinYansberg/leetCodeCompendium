@@ -17,6 +17,6 @@ var productExceptSelf = function (nums) {
   return res;
 };
 
-// https://leetcode.com/problems/product-of-array-except-self/discuss/65622/Simple-Java-solution-in-O(n)-without-extra-space
+// https://leetcode.com/problems/product-of-array-except-self/
 
 console.log(productExceptSelf([1, 2, 3, 4])); // [24,12,8,6]
