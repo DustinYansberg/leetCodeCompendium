@@ -3,30 +3,68 @@
  * @return {number[][]}
  */
 const threeSum = function (nums) {
-  // the end goal is to have all possible two-pairs and seek out their complement that adds to 0.
-  // add these triplets as exclusive arrays to an array of all triplets that add to 0
   nums.sort((a, b) => a - b);
-  const result = [];
-  for (let i = 0; i < nums.length - 2; i++) {
-    if (i > 0 && nums[i] === nums[i - 1]) continue;
-    let j = i + 1,
-      k = nums.length - 1;
-    while (j < k) {
-      const sum = nums[i] + nums[j] + nums[k];
-      if (sum === 0) {
-        result.push([nums[i], nums[j], nums[k]]);
-        while (nums[j] === nums[j + 1]) j++;
-        while (nums[k] === nums[k - 1]) k--;
-        j++;
-        k--;
-      } else if (sum < 0) {
-        j++;
+  const res = [];
+  let i = 0,
+    lo = 1,
+    hi = nums.length - 1;
+
+  while (nums[i] <= 0) {
+    if (nums[i] == nums[i - 1]) {
+      i++;
+      continue;
+    }
+    lo = i + 1;
+    hi = nums.length - 1;
+    while (lo < hi) {
+      const sum = nums[i] + nums[lo] + nums[hi];
+      if (sum < 0) {
+        lo++;
+      } else if (sum > 0) {
+        hi--;
       } else {
-        k--;
+        res.push([nums[i], nums[lo], nums[hi]]);
+        hi--;
+        lo++;
+        while (nums[lo] === nums[lo - 1]) {
+          lo++;
+        }
       }
     }
+    i++;
   }
-  return result;
+  return res;
+
+  /**
+   let i = 0,
+     j = 0;
+   while (i < nums.length - 2) {
+     if (j >= nums.length - 1) {
+       i++;
+       j = i + 1;
+     }
+     dict[(nums[i] + nums[j]) * -1] = [nums[i], nums[j]];
+ 
+     j++;
+   }
+ 
+   for (let i = 0; i < nums.length; i++) {
+     if (dict[nums[i]]) {
+       // console.log(res);
+       res.push([nums[i], ...dict[nums[i]]]);
+       // console.log(res);
+       delete dict[nums[i]];
+     }
+   }
+   res.forEach((arr) => arr.sort((a, b) => a - b));
+   let set = new Set(res);
+   return res;
+   * 
+   */
 };
-nums = [-1, 0, 1, 2, -1, -4];
+
+// const nums = [0, 0, 0, 0];
+const nums = [-1, 0, 1, 0];
+//           [-4, -1, -1, 0, 1, 2]
+// const nums = [-1, 0, 1, 2, -1, -4];
 console.log(threeSum(nums));
