@@ -20,15 +20,16 @@ const threeSum = function (nums) {
       const sum = nums[i] + nums[lo] + nums[hi];
       if (sum < 0) {
         lo++;
+        continue;
       } else if (sum > 0) {
         hi--;
-      } else {
-        res.push([nums[i], nums[lo], nums[hi]]);
-        hi--;
+        continue;
+      }
+      res.push([nums[i], nums[lo], nums[hi]]);
+      hi--;
+      lo++;
+      while (nums[lo] === nums[lo - 1]) {
         lo++;
-        while (nums[lo] === nums[lo - 1]) {
-          lo++;
-        }
       }
     }
     i++;

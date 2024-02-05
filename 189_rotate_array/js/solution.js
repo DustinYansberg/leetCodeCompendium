@@ -25,28 +25,17 @@ rotate 2 steps to the right: [3,99,-1,-100]
  * @param {number} k
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-var rotate = function (nums, k) {
-  var rotate = function (nums, k) {
-    if (k === nums.length) {
-      return;
-    }
-    if (k > nums.length) {
-      k = k % nums.length;
-    }
-    nums.reverse();
-    for (let i = 0; i < k; i++) {
-      nums.push(nums[i]);
-    }
-    nums.reverse();
-    for (let i = k; i > 0; i--) {
-      nums.pop();
-    }
-  };
-};
 
-/**
- * Second Solution
- */
+var rotate = function (nums, k) {
+  k = k % nums.length;
+  // reverse the array up to the part that needs to be at the beginning
+  // then reverse the whole array
+  // then reverse the portion of the array that was not reversed originally
+
+  reverse(nums, 0, nums.length - 1);
+  reverse(nums, 0, k - 1);
+  reverse(nums, k, nums.length - 1);
+};
 
 var reverse = function (nums, start, end) {
   while (start < end) {
@@ -58,6 +47,10 @@ var reverse = function (nums, start, end) {
   }
 };
 
-// Reverse Entire Array
-// Reverse K elements
-// Reverse remaining elements
+const nums = [1, 2, 3, 4, 5, 6, 7];
+const nums2 = [-1, -100, 3, 99];
+rotate(nums, 3);
+rotate(nums2, 2);
+
+console.log(nums);
+console.log(nums2);
