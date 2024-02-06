@@ -64,15 +64,11 @@ var intToRoman = function (num) {
     [1, "I"],
   ];
   let i = 0;
-
   while (num > 0) {
     const divisor = map[i][0];
-
     i++;
     let currNum = Math.floor(num / divisor);
-
     num -= currNum * divisor;
-
     while (currNum > 0) {
       res += map[i - 1][1];
       currNum--;
