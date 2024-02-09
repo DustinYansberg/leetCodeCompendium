@@ -26,4 +26,23 @@ Explanation: In this case, no transactions are done and the max profit = 0.
  * @param {number[]} prices
  * @return {number}
  */
-var maxProfit = function (prices) {};
+var maxProfit = function (prices) {
+  let currMax = 0;
+  let j = 0,
+    i = 0;
+  while (j < prices.length) {
+    const diff = prices[j] - prices[i];
+    if (prices[i] > prices[j]) {
+      i++;
+    }
+    if (prices[i] <= prices[j]) {
+      diff > currMax && (currMax = diff);
+      j++;
+    }
+  }
+  return currMax;
+};
+
+const prices = [7, 6, 4, 3, 1];
+
+console.log(maxProfit(prices));
