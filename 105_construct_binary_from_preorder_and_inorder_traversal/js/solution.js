@@ -66,7 +66,7 @@ function dfs(preorder, inorder, rootValue) {
   const rightPreOrder = preorder.slice(n + 1);
 
   return new TreeNode(
-    preorder[0],
+    preorder[postorder.length - 1],
     dfs(leftPreOrder, leftInOrder, leftPreOrder[0]),
     dfs(rightPreOrder, rightInOrder, rightPreOrder[0])
   );
