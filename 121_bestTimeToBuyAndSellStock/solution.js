@@ -28,21 +28,26 @@ Explanation: In this case, no transactions are done and the max profit = 0.
  */
 var maxProfit = function (prices) {
   let currMax = 0;
-  let j = 0,
-    i = 0;
+  let j = 0;
+  let i = 0;
+
   while (j < prices.length) {
     const diff = prices[j] - prices[i];
+
     if (prices[i] > prices[j]) {
       i++;
-    }
-    if (prices[i] <= prices[j]) {
+    } else if (prices[j] >= prices[i]) {
       diff > currMax && (currMax = diff);
+      // j < prices.length - 1 && j++;
       j++;
     }
   }
+
   return currMax;
 };
 
-const prices = [7, 6, 4, 3, 1];
+const prices1 = [7, 1, 5, 3, 6, 4];
+const prices2 = [7, 6, 4, 3, 1];
 
-console.log(maxProfit(prices));
+console.log(maxProfit(prices1));
+console.log(maxProfit(prices2));
