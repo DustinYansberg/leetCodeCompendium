@@ -35,25 +35,6 @@ Output: [0]
  * @param {TreeNode} root
  * @return {void} Do not return anything, modify root in-place instead.
  */
-var flatten = function (root) {
-  if (!root) return;
-
-  let tmp = root.right;
-
-  if (root.left) {
-    flatten(root.left);
-    root.right = root.left;
-    root.left = null;
-  }
-
-  let node = root;
-  while (node.right) {
-    node = node.right;
-  }
-  node.right = tmp;
-
-  flatten(root.right);
-};
 
 function flatten(root) {
   if (!root) return;
