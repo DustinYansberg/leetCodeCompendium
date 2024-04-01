@@ -81,10 +81,10 @@ var connect = function (root) {
         node.next = q[0];
       }
       if (node.left) {
-        q.append(node.left);
+        q.push(node.left);
       }
       if (node.right) {
-        q.append(node.right);
+        q.push(node.right);
       }
     }
   }
