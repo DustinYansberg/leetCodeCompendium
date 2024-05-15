@@ -128,3 +128,5 @@ const board = [
 const word = "ABCESEEEFS";
 
 console.log(exist(board, word));
+
+return;
