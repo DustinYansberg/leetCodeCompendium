@@ -47,4 +47,84 @@
  * @param {string} word
  * @return {boolean}
  */
-var exist = function (board, word) {};
+var exist = function (board, word) {
+  for (let y = 0; y < board.length; y++) {
+    for (let x = 0; x < board[0].length; x++) {
+      if (board[y][x] === word[0]) {
+        if (dfs(board, x, y, word, board[y][x], new Set())) {
+          return true;
+        }
+      }
+    }
+  }
+  function dfs(board, x, y, word, str, visited) {
+    if (visited.has(`${y}, ${x}`)) {
+      console.log(`Already visited ${y} , ${x}`);
+      console.log(str, "\n");
+      return false;
+    }
+    visited.add(`${y}, ${x}`);
+
+    const pos = str.length;
+
+    if (str === word) {
+      return true;
+    }
+    if (board[y + 1]) {
+      if (board[y + 1][x] === word[pos]) {
+        console.log(
+          `FROM: ${y} , ${x}\nTO: ${y + 1} , ${x} \n${board[y][x]}->${
+            board[y + 1][x]
+          }\n`
+        );
+        if (dfs(board, x, y + 1, word, str + board[y + 1][x], visited)) {
+          return true;
+        }
+      }
+    }
+    if (board[y - 1]) {
+      if (board[y - 1][x] === word[pos]) {
+        console.log(
+          `FROM: ${y} , ${x}\nTO: ${y - 1} , ${x} \n${board[y][x]}->${
+            board[y - 1][x]
+          }\n`
+        );
+        if (dfs(board, x, y - 1, word, str + board[y - 1][x], visited)) {
+          return true;
+        }
+      }
+    }
+    if (board[y][x + 1] === word[pos]) {
+      console.log(
+        `FROM: ${y} , ${x}\nTO: ${y} , ${x + 1}  \n${board[y][x]}->${
+          board[y][x + 1]
+        }\n`
+      );
+      if (dfs(board, x + 1, y, word, str + board[y][x + 1], visited)) {
+        return true;
+      }
+    }
+    if (board[y][x - 1] === word[pos]) {
+      console.log(
+        `FROM: ${y} , ${x}\nTO: ${y} , ${x - 1} \n${board[y][x]}->${
+          board[y][x - 1]
+        }\n`
+      );
+      if (dfs(board, x - 1, y, word, str + board[y][x - 1], visited)) {
+        return true;
+      }
+    }
+    visited.delete(`${y}, ${x}`);
+    return false;
+  }
+  return false;
+};
+
+const board = [
+  ["A", "B", "C", "E"],
+  ["S", "F", "E", "S"],
+  ["A", "D", "E", "E"],
+];
+const word = "ABCESEEEFS";
+
+console.log(exist(board, word));
