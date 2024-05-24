@@ -4,19 +4,20 @@
  * @return {boolean}
  */
 var searchMatrix = function (matrix, target) {
-  let l = 0,
-    r = matrix.length - 1;
-  while (l <= r) {
-    let m = l + Math.floor((r - l) / 2);
-    if (matrix[m][0] > target) {
-      r = m - 1;
+  let start = 0;
+  let end = matrix.length - 1;
+
+  while (start <= end) {
+    const mid = start + Math.floor((end - start) / 2);
+    if (matrix[mid][0] > target) {
+      end = mid - 1;
       continue;
     }
-    if (matrix[m][matrix[m].length - 1] < target) {
-      l = m + 1;
+    if (matrix[mid][matrix[0].length - 1] < target) {
+      start = mid + 1;
       continue;
     }
-    return matrix[m].includes(target);
+    return matrix[mid].indexOf(target) !== -1;
   }
   return false;
 };
