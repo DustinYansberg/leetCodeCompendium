@@ -1,19 +1,26 @@
 var findMin = function (nums) {
-  let left = 0;
-  let right = nums.length - 1;
-  let minVal = nums[left] > nums[right] ? nums[right] : nums[left];
+  let l = 0,
+    r = nums.length - 1;
 
-  while (left <= right) {
-    let mid = left + Math.floor((right - left) / 2);
-
-    if (nums[mid] < minVal) {
-      minVal = nums[mid];
-      if (nums[mid] < nums[mid + 1]) {
-        right = mid - 1;
-      }
+  while (l <= r) {
+    const m = Math.floor((l + r) / 2);
+    if (nums[m - 1] && nums[m - 1] > nums[m]) {
+      return nums[m];
+    } else if (nums[r] >= nums[m]) {
+      r = m - 1;
     } else {
-      left = mid + 1;
+      l = m + 1;
     }
   }
-  return minVal;
+  return nums[0];
 };
+
+// with l, r, m
+
+// if l is less than m, then l and m are part of a normally sorted portion of the array
+
+//                           m
+//                              r
+//                        l
+const nums = [4, 5, 6, 7, 0, 1, 2];
+const nums2 = [11, 13, 15, 17];

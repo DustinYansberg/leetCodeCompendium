@@ -4,43 +4,41 @@
  * @return {number[]}
  */
 var searchRange = function (nums, target) {
-  // find first position
-  let left = 0,
-    right = nums.length - 1,
-    firstOccurence = -1;
+  let l = 0,
+    r = nums.length - 1;
 
-  while (left <= right) {
-    let m = left + Math.floor((right - left) / 2);
-    if (nums[m] == target) {
-      firstOccurence = m;
-      right = m - 1;
-    } else if (nums[m] < target) {
-      left = m + 1;
-    } else {
-      right = m - 1;
+  let startIndex = -1;
+  let endIndex = -1;
+  // search for start index
+  while (l <= r) {
+    const m = Math.floor((l + r) / 2);
+    if (nums[m] < target) {
+      l = m + 1;
+    } else if (nums[m] >= target) {
+      r = m - 1;
     }
+    if (nums[l] == target) startIndex = l;
   }
 
-  // if the first occurence wasn't found
-  // exit now to save time
-  if (firstOccurence === -1) {
-    return [-1, -1];
-  }
-
-  // find last position of target
-  (left = 0), (right = nums.length - 1);
-  let lastOccurence = -1;
-
-  while (left <= right) {
-    let m = left + Math.floor((right - left) / 2);
-    if (nums[m] == target) {
-      lastOccurence = m;
-      left = m + 1;
-    } else if (nums[m] > target) {
-      right = m - 1;
-    } else {
-      left = m + 1;
+  l = 0;
+  r = nums.length - 1;
+  // search for end index
+  while (l <= r) {
+    const m = Math.floor((l + r) / 2);
+    if (nums[m] > target) {
+      r = m - 1;
+    } else if (nums[m] <= target) {
+      l = m + 1;
     }
+    if (nums[r] == target) endIndex = r;
   }
-  return [firstOccurence, lastOccurence];
+  return [startIndex, endIndex];
 };
+
+//                                       m
+//                                    r
+//                                       l
+const nums = [5, 7, 7, 8, 8, 8, 8, 8, 8, 10],
+  target = 8;
+
+console.log(searchRange(nums, target));
